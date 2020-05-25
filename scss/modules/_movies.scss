@@ -21,7 +21,8 @@
     cursor: pointer;
 
     .movie__info {
-      opacity: 100%;
+      padding: 10px 5px;
+      height: inherit;
       top: -8px;
       border: 8px solid black;
       border-bottom: none;
@@ -59,13 +60,12 @@
   }
   
   &__info {
-    padding: 10px 5px;
     font: 600 15px $font;
     top: 100%;
-    opacity: 0;
-    border: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
     width: inherit;
-    height: inherit;
+    height: 0px;
     overflow: hidden;
     position: absolute;
     background-color: white;
