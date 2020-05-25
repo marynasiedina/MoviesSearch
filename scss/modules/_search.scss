@@ -1,0 +1,12 @@
+
+.navigation {
+  display: flex;
+  margin: 20px auto 40px;
+  justify-content: space-around;
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+    margin: 10px auto 20px;
+    align-items: center;
+  }
+}
