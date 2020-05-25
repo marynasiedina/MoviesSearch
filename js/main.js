@@ -51,7 +51,7 @@ $(document).ready(function() {
 
   function drawMovie(movie) {
     let movieDOM = `<div class="movie">
-                      <img class="roll" src="../images/roll.png">
+                      <img class="roll" src="images/roll.png">
                       <img class="poster" src="${IMG_URL + movie.poster_path}" alt="">
                       <h2 class="movie__title">${movie.title}</h2>
                       <div class="movie__info">${movie.title}
