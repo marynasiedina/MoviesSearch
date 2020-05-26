@@ -16,6 +16,18 @@ $(document).ready(function() {
       getMovie()
   })
 
+  $('.reviews__close').click(()=>{
+    removeReviews()
+  })
+
+  $('.window').mouseup(function (e){ // событие клика по веб-документу
+		let div = $(".reviews"); // тут указываем ID элемента
+		if (!div.is(e.target) // если клик был не по нашему блоку
+		    && div.has(e.target).length === 0) { // и не по его дочерним элементам
+			removeReviews() // скрываем его
+		}
+	});
+
   
   // Functions
   function getMovie() {
@@ -41,6 +53,8 @@ $(document).ready(function() {
           res.results.forEach((movie) => {
             if (movie.poster_path !== null)
               $('.movies').append(drawMovie(movie))
+              let $movieBox = $('.movies').find(`.${movie.id}`)
+              $movieBox.click(()=>getReviews(movie.id))
           })
         }
         $('body').removeClass('loading')
@@ -50,7 +64,7 @@ $(document).ready(function() {
   }
 
   function drawMovie(movie) {
-    let movieDOM = `<div class="movie">
+    let movieDOM = `<div class="movie ${movie.id}">
                       <img class="roll" src="images/roll.png">
                       <img class="poster" src="${IMG_URL + movie.poster_path}" alt="">
                       <h2 class="movie__title">${movie.title}</h2>
@@ -64,6 +78,7 @@ $(document).ready(function() {
   }
 
   function getReviews(id) {
+    console.log(id)
 
     $.ajax({
       url: `${API_URL}/movie/${id}`,
@@ -72,8 +87,20 @@ $(document).ready(function() {
       data: {
         api_key: API_KEY
       }
-    })
+    }).then(res => {drawReviews(res)})
     
   }
-})
 
+
+  function drawReviews(movie) {
+    console.log(movie.overview)
+    $('.window').addClass('hide-off')
+    $('.reviews__title').text(movie.title)
+    $('.reviews__info').text(movie.overview)
+  }
+
+  function removeReviews() {
+    $('.window').removeClass('hide-off')
+  }
+
+})

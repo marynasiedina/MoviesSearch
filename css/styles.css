@@ -85,6 +85,7 @@ body {
   background: #f5f5f5 url(../images/bg.png) repeat-y 15px top;
   font: 300 14px "Prompt", sans-serif;
   padding-left: 120px;
+  position: relative;
 }
 
 .title {
@@ -123,6 +124,14 @@ body {
           justify-content: space-between;
 }
 
+@media (max-width: 767px) {
+  .movies {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
 .movies .movie {
   position: relative;
   max-width: 185px;
@@ -154,6 +163,7 @@ body {
 
 .movies .movie:hover .movie__title {
   bottom: 80%;
+  opacity: 0;
 }
 
 .movies .movie .roll {
@@ -185,16 +195,20 @@ body {
 
 .movies .movie__info {
   font: 600 15px "Prompt", sans-serif;
-  top: 100%;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
+  top: 100%;
   width: inherit;
   height: 0px;
-  overflow: hidden;
   position: absolute;
   background-color: white;
   -webkit-transition: .3s ease-in-out;
   transition: .3s ease-in-out;
+  overflow-y: scroll;
+}
+
+.movies .movie__info::-webkit-scrollbar {
+  width: 0px;
 }
 
 .movies .movie__info h3 {
@@ -246,5 +260,68 @@ body {
   height: 100%;
   background: #ffffffcd url("../images/preloader.svg") no-repeat center;
   z-index: 99;
+}
+
+.hide {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  background-color: rgba(152, 158, 153, 0.589);
+}
+
+.hide-off {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.reviews {
+  position: relative;
+  font: "Prompt", sans-serif;
+  background-color: white;
+  padding: 20px 20px;
+  width: 30%;
+  height: 50%;
+  overflow-y: scroll;
+}
+
+@media (max-width: 767px) {
+  .reviews {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.reviews::-webkit-scrollbar {
+  width: 10px;
+}
+
+.reviews__title {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.reviews___info {
+  font-size: 20px;
+}
+
+.reviews__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  font-size: 30px;
+  font-weight: 600;
 }
 /*# sourceMappingURL=styles.css.map */
