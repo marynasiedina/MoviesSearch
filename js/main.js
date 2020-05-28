@@ -78,11 +78,15 @@ $(document).ready(function() {
     console.log(movie.id)
 
     let url = `${API_URL}/movie/${movie.id}/reviews?api_key=${API_KEY}`;
-    let response = await fetch(url);
-    let res = await response.json();
-    drawReviews(res.results, movie.title)
-    console.log(res)
-    
+    try {
+      let response = await fetch(url);
+      let res = await response.json();
+      drawReviews(res.results, movie.title)
+      console.log(res)
+    } catch (err) {
+      alert('error!')
+    }
+
   }
 
 
