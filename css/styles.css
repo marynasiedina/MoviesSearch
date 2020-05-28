@@ -156,20 +156,19 @@ body {
 .movies .movie:hover .movie__info {
   padding: 10px 5px;
   height: inherit;
-  top: -8px;
   border: 8px solid black;
-  border-bottom: none;
+  border-radius: 0 0 5px 5px;
 }
 
 .movies .movie:hover .movie__title {
-  bottom: 80%;
-  opacity: 0;
+  bottom: 50%;
+  background-color: white;
 }
 
 .movies .movie .roll {
   position: absolute;
   left: 0;
-  top: -75px;
+  top: -70px;
   width: inherit;
 }
 
@@ -197,9 +196,9 @@ body {
   font: 600 15px "Prompt", sans-serif;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  top: 100%;
   width: inherit;
   height: 0px;
+  bottom: 0;
   position: absolute;
   background-color: white;
   -webkit-transition: .3s ease-in-out;
@@ -312,8 +311,14 @@ body {
   margin-bottom: 20px;
 }
 
-.reviews___info {
-  font-size: 20px;
+.reviews__article {
+  font-size: 14px;
+  padding-bottom: 20px;
+}
+
+.reviews__author {
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .reviews__close {

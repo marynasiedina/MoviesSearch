@@ -26,21 +26,20 @@
     .movie__info {
       padding: 10px 5px;
       height: inherit;
-      top: -8px;
-      border: 8px solid black;
-      border-bottom: none;
+      border: 8px solid black ;
+      border-radius: 0 0 5px 5px;
     }
 
     .movie__title {
-      bottom:80%;
-      opacity: 0;
+      bottom: 50%;
+      background-color: white;
     }
   }
 
   .roll {
     position: absolute;
     left: 0;
-    top: -75px;
+    top: -70px;
     width: inherit;
   }
   
@@ -67,9 +66,9 @@
     font: 600 15px $font;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    top: 100%;
     width: inherit;
     height: 0px;
+    bottom: 0;
     position: absolute;
     background-color: white;
     transition: .3s ease-in-out;

@@ -34,11 +34,18 @@
     font-size: 25px;
     font-weight: 600;
     margin-bottom: 20px;
-  }   
-  
-  &___info {
-    font-size: 20px;
   }
+
+  &__article {
+    font-size: 14px;
+    padding-bottom: 20px;
+  }
+  &__author {
+    font-size: 18px;
+    font-weight: 600;
+    
+  }
+  
   &__close {
     position: absolute;
     top: 10px;

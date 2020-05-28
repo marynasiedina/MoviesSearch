@@ -21,7 +21,7 @@ $(document).ready(function() {
   })
 
   $('.window').mouseup(function (e){ // событие клика по веб-документу
-		let div = $(".reviews"); // тут указываем ID элемента
+		let div = $('.reviews'); // тут указываем ID элемента
 		if (!div.is(e.target) // если клик был не по нашему блоку
 		    && div.has(e.target).length === 0) { // и не по его дочерним элементам
 			removeReviews() // скрываем его
@@ -30,23 +30,19 @@ $(document).ready(function() {
 
   
   // Functions
-  function getMovie() {
+  async function getMovie() {
     let query = $('.search__field').val()
 
     $('body').addClass('loading')
     
     if (query !== '') {
       $('.movie').remove()
+      let url = `${API_URL}/search/movie?api_key=${API_KEY}&query=${query}`
+      try {
+        let response = await fetch(url)
+        let res = await response.json()
+        console.log(res)
 
-      $.ajax({
-        url: `${API_URL}/search/movie`,
-        type: 'GET',
-        dataType: 'json',
-        data: {
-          api_key: API_KEY,
-          query: query
-        }
-      }).then((res) => {
         if (res.results.length === 0) {
           alert('No movies found')
         } else {
@@ -54,13 +50,14 @@ $(document).ready(function() {
             if (movie.poster_path !== null)
               $('.movies').append(drawMovie(movie))
               let $movieBox = $('.movies').find(`.${movie.id}`)
-              $movieBox.click(()=>getReviews(movie.id))
+              $movieBox.click(()=>getReviews(movie))
           })
         }
-        $('body').removeClass('loading')
-      })
+        $('body').removeClass('loading')    
+      } catch (err) {
+        alert('error!')
+      }
     }
-
   }
 
   function drawMovie(movie) {
@@ -77,27 +74,35 @@ $(document).ready(function() {
     return movieDOM
   }
 
-  function getReviews(id) {
-    console.log(id)
+  async function getReviews(movie) {
+    console.log(movie.id)
 
-    $.ajax({
-      url: `${API_URL}/movie/${id}`,
-      type: 'GET',
-      dataType: 'json',
-      data: {
-        api_key: API_KEY
-      }
-    }).then(res => {drawReviews(res)})
+    let url = `${API_URL}/movie/${movie.id}/reviews?api_key=${API_KEY}`;
+    let response = await fetch(url);
+    let res = await response.json();
+    drawReviews(res.results, movie.title)
+    console.log(res)
     
   }
 
 
-  function drawReviews(movie) {
-    console.log(movie.overview)
+  function drawReviews(movie, title) {
     $('.window').addClass('hide-off')
-    $('.reviews__title').text(movie.title)
-    $('.reviews__info').text(movie.overview)
+    if (movie.length == 0) {
+      $('.reviews__title').text(`Not found review`);
+      $('.reviews__author').text(``);
+      $('.reviews__article').text(``);
+    }
+    else { 
+    $('.reviews__title').text(title);
+    $('.reviews__info').text(``);
+    movie.forEach(reviews => {
+        $('.reviews__info').append(`
+        <span class="reviews__author">${reviews.author}</span>
+				<p class="reviews__article">${reviews.content}</p>`)
+      })
   }
+}
 
   function removeReviews() {
     $('.window').removeClass('hide-off')
